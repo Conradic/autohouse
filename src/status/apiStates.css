@@ -1,0 +1,58 @@
+.stateHolder{
+    display: unset;
+    width: 150px;
+    height: 100%;
+    margin: 5px;
+}
+
+.holder{
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: rgb(36, 36, 99);
+    margin: 5px;
+    border-radius: 50%;
+}
+
+
+.inactive-Light{
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    background: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.awaiting-Light{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    background: rgb(121, 121, 8);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.active-Light{
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    background: green;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+}

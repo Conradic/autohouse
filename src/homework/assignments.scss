@@ -1,0 +1,44 @@
+.heading{
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    background: rgb(168, 172, 255);
+}
+
+.headBand{
+    border-bottom-width: 2px;
+    top: 0;
+    height: 13px;
+    width: 100%;
+    position: absolute;
+}
+
+.tableAssignments{
+    position: relative;
+    top: 15px;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    button{
+        width: 60px;
+        height: 40px;
+    }
+}
+
+.AssManager{
+    table{
+        background: white;
+        color: black;
+        padding: 2px;
+        border-color: black;
+        border-width: 2px;
+        border-style: solid;
+    }
+    td{
+        border-color: black;
+        border-width: 2px;
+        border-style: solid;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}

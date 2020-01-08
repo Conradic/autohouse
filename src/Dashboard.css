@@ -1,0 +1,26 @@
+
+
+  
+  .Dashboard-header {
+    background-color: #53555a;
+    min-height: 100vh;
+    height: 100%;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  .content{
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 206px;
+    position: absolute;
+  }
+
+  .navBar{
+    height: 100%;
+  }

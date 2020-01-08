@@ -1,0 +1,71 @@
+.bar{
+    width: 100%;
+    background-color: green;
+    top: auto;
+    margin-top: auto;
+    position: absolute;
+    bottom: 0;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.graphHolder{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    z-index: 6;
+}
+
+.bars{
+    height: 87%;
+    margin-top: 3%;
+    position: relative;
+    display: inline-block;
+    font-size: 0;
+    border-color: black;
+    border-top-width: 1px;
+    border-top-color: black;
+    border-top-style: dashed;
+    z-index: 6;
+}
+
+.bars:hover{
+    font-size: .6em;
+    z-index: 8 !important;
+    transform: scaleX(1.4);
+}
+
+.hour{
+    color:  white;
+    top: 0;
+    position: absolute;
+    text-align: center;
+}
+
+.height{
+    display: flex;
+    height: 100%;
+    width: 10px;
+    border-right-width: 3px;
+    border-color: black;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.midMark{
+    position: relative;
+    display: unset;
+    padding-top: 50%;
+    top: 0;
+    z-index: 7 !important;
+}
+
+.graphHeader{
+    position: absolute;
+    margin-left: 5%;
+    font-size: .4em;
+    top: 0;
+  }

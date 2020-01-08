@@ -1,0 +1,36 @@
+.selectSetPanel{
+    height: 350px;
+    position: absolute;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 100%;
+    background-color: white;
+    border-color: black;
+    border-width: 4px;
+    border-style: solid;
+    color: black;
+    overflow-y: auto;
+    font-size: 1em;
+}
+
+.SelectHolder{
+    position: relative;
+}
+
+.option:hover{
+    background: rgba(0, 0, 255, 0.308);
+}
+
+.option{
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: dashed;
+    border-bottom-width: 2px;
+    border-color: black;
+}
+
+.MapHolder{
+    font-size: .6em;
+}

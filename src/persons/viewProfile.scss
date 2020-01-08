@@ -1,0 +1,57 @@
+
+.dataTitle{
+    font-size: .6em;
+    bottom: 0;
+    height: .7em;
+    left: 0;
+    justify-content: left;
+}
+.headBand{
+    border-bottom-width: 2px;
+    top: 0;
+    height: 13px;
+    width: 100%;
+    position: absolute;
+}
+
+.tablePersons{
+    top: 15px;
+    position: relative;
+}
+
+.ProfileForm{
+    top: 15px;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    color: black;
+    position: relative;
+
+    
+
+    td{
+        border-style: unset;
+        border-width: unset;
+        color: black;
+    }
+
+    input{
+        background: rgb(223, 219, 219);
+    }
+
+    textarea{
+        min-width: 400px;
+        min-height: 50px;
+        background:  rgb(223, 219, 219);
+    }
+
+    button{ 
+        background: rgb(223, 219, 219);
+    }
+
+    table{
+        margin-left: auto;
+        margin-right: auto;
+        background: rgb(189, 189, 189);
+    }
+}

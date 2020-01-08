@@ -1,0 +1,23 @@
+
+
+.statuscontent{
+    display: inline-flex;
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: 99%;
+}
+
+.refreshButton{
+    display: unset;
+    margin: 10px;
+    height: 30px;
+}
+
+.statusHolder{
+    left: 1%;
+    display: inline-flex;
+    position: relative;
+    margin-top: 50px;
+    height: 95%;
+}

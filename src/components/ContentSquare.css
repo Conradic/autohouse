@@ -1,0 +1,13 @@
+.contentSquare-tile{
+    display: inline-table;
+    border-style: solid;
+    border-width: 0;
+    border-color: rgb(85, 85, 148);
+    width: 24.8%;
+    margin-top: .03%;
+    height: 100%;
+}
+
+.contentSquare-body{
+    height: 100%;
+}
