@@ -1,7 +1,7 @@
 import React from 'react';
 import * as functions from '../components/functions.js';
+import {server} from '../configuration.js';
 
-const server = 'http://localhost:5000';
 const nest_id = 0;
 
 class API extends React.Component{

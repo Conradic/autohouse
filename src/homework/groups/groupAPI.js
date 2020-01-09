@@ -1,4 +1,5 @@
-const server = 'http://localhost:5000';
+import {server} from '../../configuration.js';
+
 
 export const getGroupList= async()=>{
     const response = await fetch(server+'/getListOfGroup');

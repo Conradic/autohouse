@@ -1,5 +1,5 @@
 import * as functions from '../../components/functions.js';
-const server = 'http://localhost:5000';
+import {server} from '../../configuration.js';
 
 
 export const fetchEndpoint= async(endpoint)=>{
@@ -98,11 +98,8 @@ export const updateDevice=async(id, data)=>{
 
 
   export const turnLightOn=async(mac)=>{
-    console.log(server+'/turnLightOn/'+mac);
     const response = await fetch(server+'/turnLightOn/'+mac);
-    console.log(server+'/turnLightOn/'+mac);
     const body = await response.json();
-    console.log(server+'/turnLightOn/'+mac);
     
     if (response.status !== 200) {
         console.log(body.message); 

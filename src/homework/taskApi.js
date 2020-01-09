@@ -1,4 +1,5 @@
-const server = 'http://localhost:5000';
+import {server} from '../configuration.js';
+
 
 
 export const getTaskList= async()=>{

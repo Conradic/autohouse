@@ -22,11 +22,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-var whitelist = ['http://10.1.1.133:3000', 'http://localhost:3000','http://localhost:5000', '192.168.30.5']
+var whitelist = ['http://10.1.1.133:3000', 'http://localhost:3000','http://localhost:5000', '192.168.30.5', 'http://192.168.40.200:3000']
 var corsOptions = {
   origin: function (origin, callback) {
     updateConnection(origin);
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || true) {
       callback(null, true)
     } else {
       console.log('Not whitelisted: '+origin);
@@ -220,7 +220,7 @@ const changeTpLinks = (req, res, mac, powerState) => {
     });
     });
      res.send({powerState});
-     discoverTpLinks(null,null,true);
+     //discoverTpLinks(null,null,true);
     
     //un comment to see all found devices
     setTimeout(function(){
@@ -254,8 +254,7 @@ const discoverTpLinks = (req, res, server=false) => {
           deviceList.push({mac: device1.mac_address, title: "U: "+device1.alias, dev_name: device1.dev_name, found: true, module: device1});
         }
       }
-      console.log('TP-Link found: '+ device1.mac);
-      console.log(device1);
+      console.log('TP-Link found:'+ device1.mac +'   Name:' + device1.dev_name);
     });
     if(status !== null && server === false){
       console.log(`Light: ${tpLinkLight}. ${status?'A':'Dea'}ctivated by: ${req.headers.origin}`);   

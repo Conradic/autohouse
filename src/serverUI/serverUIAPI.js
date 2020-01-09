@@ -1,5 +1,6 @@
 import * as functions from '../components/functions.js';
-const server = 'http://localhost:5000';
+import server from '../configuration';
+
 
 
 

@@ -1,6 +1,6 @@
 import * as functions from '../components/functions.js';
+import {server} from '../configuration.js';
 
-const server = 'http://localhost:5000';
 
 
 export const fetchEndpoint= async(endpoint)=>{
