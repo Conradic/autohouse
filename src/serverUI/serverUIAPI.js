@@ -1,5 +1,5 @@
 import * as functions from '../components/functions.js';
-import server from '../configuration';
+import {server} from '../configuration';
 
 
 

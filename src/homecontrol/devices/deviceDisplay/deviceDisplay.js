@@ -33,7 +33,6 @@ export default class DeviceList extends React.Component{
 
     componentDidMount=()=>{
         API.getTPLinkList().then((data)=>{
-            console.log(data);
             let displayContent = this.getDeviceDisplay(data);
             this.setState({displayDevices: data, displayContent});
         })
