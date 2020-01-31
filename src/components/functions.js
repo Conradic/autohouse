@@ -128,6 +128,7 @@ export const getLocation=(callback)=>{
             latLon.latitude = position.coords.latitude;
             latLon.longitude= position.coords.longitude;
             callback(latLon);
+            console.log(latLon);
         }, latitude, longitude)
     }
     else{

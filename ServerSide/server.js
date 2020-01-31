@@ -9,8 +9,8 @@ const Task = require('./dbAPI/task.js');
 const Group = require('./dbAPI/groups.js');
 const devices = require('./dbAPI/devices.js');
 const bodyParser = require('body-parser')
-const GPS = require('./location.js');
 const motionSensor = require('./dbAPI/motionAPI.js');
+import {RASPBERRY} from './localConfig.js';
 
 app.use(bodyParser.json())
 app.use(
@@ -40,7 +40,9 @@ const updateConnection=(origin)=>{
   if(!currentClients[origin] || currentClients[origin] !== true){
     currentClients[origin] = true;
     console.log('Pinged by: ' + origin);
-    console.log(GPS.location);
+    if(RASPBERRY){
+      console.log(GPS.location);
+    }
 
     new Promise(function(resolve, reject){
       setTimeout(function(){
@@ -80,7 +82,9 @@ app.listen(port, () =>{
   console.log(`Listening on port ${port}`);
   devices.getListOfActiveDevices(null, null, null, true, ((res)=>deviceList = res));
   updateDeviceStatus();
-  console.log(GPS.location);
+  if(RASPBERRY){
+    console.log(GPS.location);
+  }
 });
 
 
@@ -339,17 +343,21 @@ app.post('/updateGroup/:id', cors(corsOptions), Group.updateGroup);
 
 
 
-var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-var LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
+if(RASPBERRY){
+  const GPS = require('./location.js');
 
-var pushButton = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
+  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
+  var LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
 
-pushButton.watch(function (err, value) { //Watch for hardware interrupts on pushButton GPIO, specify callback function
-  if (err) { //if an error
-    console.error('There was an error', err); //output error message to console
-  return;
-  }
-  motionSensor.logMotion();
-  LED.writeSync(value); //turn LED on or off depending on the button state (0 or 1)
+  var pushButton = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
 
-});
+  pushButton.watch(function (err, value) { //Watch for hardware interrupts on pushButton GPIO, specify callback function
+    if (err) { //if an error
+      console.error('There was an error', err); //output error message to console
+    return;
+    }
+    motionSensor.logMotion();
+    LED.writeSync(value); //turn LED on or off depending on the button state (0 or 1)
+
+  });
+}
