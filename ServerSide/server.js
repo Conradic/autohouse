@@ -10,7 +10,27 @@ const Group = require('./dbAPI/groups.js');
 const devices = require('./dbAPI/devices.js');
 const bodyParser = require('body-parser')
 const motionSensor = require('./dbAPI/motionAPI.js');
-import {RASPBERRY} from './localConfig.js';
+const RASPBERRY = require('./localConfig.js');
+const GPS = RASPBERRY?require('./location.js'):null;
+var Gpio = RASPBERRY?require('onoff').Gpio:null;//include onoff to interact with the GPIO
+
+
+if(RASPBERRY){
+
+  var LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
+
+  var pushButton = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
+
+  pushButton.watch(function (err, value) { //Watch for hardware interrupts on pushButton GPIO, specify callback function
+    if (err) { //if an error
+      console.error('There was an error', err); //output error message to console
+    return;
+    }
+    motionSensor.logMotion();
+    LED.writeSync(value); //turn LED on or off depending on the button state (0 or 1)
+
+  });
+}
 
 app.use(bodyParser.json())
 app.use(
@@ -27,7 +47,6 @@ app.use(function(req, res, next) {
 var whitelist = ['http://10.1.1.133:3000', 'http://localhost:3000','http://localhost:5000', '192.168.30.5', 'http://192.168.40.200:3000']
 var corsOptions = {
   origin: function (origin, callback) {
-    updateConnection(origin);
     if (whitelist.indexOf(origin) !== -1 || true) {
       callback(null, true)
     } else {
@@ -36,23 +55,6 @@ var corsOptions = {
   }
 }
 
-const updateConnection=(origin)=>{
-  if(!currentClients[origin] || currentClients[origin] !== true){
-    currentClients[origin] = true;
-    console.log('Pinged by: ' + origin);
-    if(RASPBERRY){
-      console.log(GPS.location);
-    }
-
-    new Promise(function(resolve, reject){
-      setTimeout(function(){
-        resolve();
-      }, 10*60*1000)//10 minute update
-    }).then(()=>{
-      currentClients[origin] = false
-    });
-  }
-}
 
 let serverStatus = {
   connections: {
@@ -82,9 +84,6 @@ app.listen(port, () =>{
   console.log(`Listening on port ${port}`);
   devices.getListOfActiveDevices(null, null, null, true, ((res)=>deviceList = res));
   updateDeviceStatus();
-  if(RASPBERRY){
-    console.log(GPS.location);
-  }
 });
 
 
@@ -92,7 +91,7 @@ app.listen(port, () =>{
 
 const updateDeviceStatus=()=>{
   discoverTpLinks(null, null, true);
-
+/*
   getLightStatus(null, null, true);
     new Promise(function(resolve, reject){
       if(serverStatus.connections.plug){
@@ -109,7 +108,7 @@ const updateDeviceStatus=()=>{
       updateDeviceStatus();
     }).catch((error)=>{
       console.log(error);
-    });
+    });*/
 }
 
 
@@ -252,21 +251,32 @@ const discoverTpLinks = (req, res, server=false) => {
       tpLink.List.Devices.push(device1);
       if(Array.isArray(deviceList)){
         const deviceStored = deviceList.find(device=>{return device1.mac === device.mac});
+        let today = new Date();
+        today = today.getTime();
+
         if(deviceStored){
-          tpLink[deviceStored.title] = device;
           serverStatus.connections[deviceStored.mac];
           serverStatus.connections[deviceStored.mac] = true;
-          deviceStored.found = true;
-          deviceList.module = device1;
         }
         else{
-          deviceList.push({mac: device1.mac_address, title: "U: "+device1.alias, dev_name: device1.dev_name, found: true, module: device1});
+          let request = {}
+          request.body = {
+            'title': device1.alias,
+            'description': device1.dev_name,
+            'mac_address': device1.mac,
+            'active': device1.relay_state,
+            'date_added': today, 
+            'last_seen': today,
+            'type': device1.type,
+            'model': device1.model
+          };
+          devices.createDevice(request, null);
+          devices.getListOfActiveDevices(null, null, null, true, ((res)=>deviceList = res));
+          console.log('TP-Link found:'+ device1.mac +'   Name:' + device1.dev_name);
         }
       }
-      console.log('TP-Link found:'+ device1.mac +'   Name:' + device1.dev_name);
     });
     if(status !== null && server === false){
-      console.log(`Light: ${tpLinkLight}. ${status?'A':'Dea'}ctivated by: ${req.headers.origin}`);   
       device.setPowerState(status);
       res.send({status});
     }
@@ -343,21 +353,3 @@ app.post('/updateGroup/:id', cors(corsOptions), Group.updateGroup);
 
 
 
-if(RASPBERRY){
-  const GPS = require('./location.js');
-
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(4, 'out'); //use GPIO pin 4 as output
-
-  var pushButton = new Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, and releases should be handled
-
-  pushButton.watch(function (err, value) { //Watch for hardware interrupts on pushButton GPIO, specify callback function
-    if (err) { //if an error
-      console.error('There was an error', err); //output error message to console
-    return;
-    }
-    motionSensor.logMotion();
-    LED.writeSync(value); //turn LED on or off depending on the button state (0 or 1)
-
-  });
-}

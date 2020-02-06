@@ -57,7 +57,7 @@ class Forecast extends React.Component{
         if(day === 'daily'){
             data = this.state.daily;
         }
-        else{
+        else if(this.state.fullHourly.length > 0){
             data = this.state.fullHourly[day];
         }
         this.setState({data})
