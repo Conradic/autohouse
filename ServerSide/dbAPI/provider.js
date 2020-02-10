@@ -2,7 +2,7 @@ const valueSectionGeneration = (columns, body)=>{
       calls = [];
       cols =[];
       columns.forEach(col=>{
-        let safe = body[col['column_name']]!==undefined?(body[col['column_name']]).replace("'", "''"):"";
+        let safe = body[col['column_name']]!==undefined?Number.isInteger(body[col['column_name']])?0:(body[col['column_name']]).replace("'", "''"):"";
         if(safe !== ""){
           cols.push(col['column_name']);
           if(col['data_type'] == 'integer'){

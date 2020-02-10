@@ -2,7 +2,7 @@ const pool = require('./apiAccess.js').pool;
 const provider = require('./provider.js');
 
 const getListOfActiveDevices=(request, response, next, server=false, callback=null)=>{
-  pool.query('SELECT id, title, description, mac_address, device_classification_id, last_seen FROM devices WHERE active = 1 ORDER BY title DESC', (error, results)=>{
+  pool.query('SELECT id, title, description, last_seen, mac_address, device_classification_id FROM devices WHERE active = 1 ORDER BY title DESC', (error, results)=>{
       if(error){
         console.log(error);
       }
@@ -40,32 +40,17 @@ const getDeviceById = (request, response) => {
 const createDevice = (request, response) => {
   pool.query("SELECT column_name FROM information_schema.columns WHERE table_name = 'devices' AND column_name != 'id';",[], (error,results)=>{
     if(error){
-      console.log(error);
+      console.log("devices/createDevices 1: "+error);
     }
     else{
-      const columns = results.rows;
-      const body = request.body;
-      
-      calls = [];
-      cols =[];
-      columns.forEach(col=>{
-        cols.push(col['column_name']);
-        let safe = body[col['column_name']]!==undefined?(body[col['column_name']]).replace("'", "''"):"";
-        if(Number.isInteger(safe)){
-          calls.push(safe);
-        }
-        else{
-          calls.push("'"+safe+"'");
-        }
-      })
-      calls.join(",  ");
-      cols.join(',');
-      const query = "INSERT INTO devices ($1) VALUES ($2);";
-      pool.query(query, [cols,calls], (error, results2) => {
+      const val = provider.valueSectionGeneration(results.rows, request.body);
+            pool.query(`INSERT INTO devices (${val.cols}) VALUES (${val.calls});`, (error, results2) => {
         if (error) {
-          console.log(error);
+          console.log("devices/createDevices 2: "+error);
         }
-        response.status(201).send(`Device added`)
+        if(response){
+          response.status(201).send(`Device added`)
+        }
       })
     }
   })

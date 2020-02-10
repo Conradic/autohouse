@@ -11,7 +11,6 @@ const logMotion=()=>{
         pool.query(`INSERT INTO motion_log (time) VALUES('${time.format('MM/DD/YYYY, h:mm:ss a')}');`, [], (error, results)=>{
             if(error){
             console.log(error);
-            console.log(query);
             }
             else{
                 lastLog = time;
