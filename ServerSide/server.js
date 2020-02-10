@@ -10,7 +10,7 @@ const Group = require('./dbAPI/groups.js');
 const devices = require('./dbAPI/devices.js');
 const bodyParser = require('body-parser')
 const motionSensor = require('./dbAPI/motionAPI.js');
-import {RASPBERRY} from './localConfig.js';
+const RASPBERRY =require('./localConfig.js');
 
 app.use(bodyParser.json())
 app.use(
