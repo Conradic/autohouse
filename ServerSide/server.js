@@ -66,8 +66,7 @@ let serverStatus = {
     server: true
   }
 };
-let currentClients = {
-};
+
 
 let tpLink={
   livingRoom: null,

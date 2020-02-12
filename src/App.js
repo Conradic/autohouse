@@ -4,6 +4,7 @@ import * as functions from './components/functions.js';
 import './App.css';
 import * as API from './api/apiCalls.js';
 import * as Intro from './home/intro.js';
+import {DEFAULT_LONGITUDE, DEFAULT_LATITUDE} from './configuration.js';
 
 
 class App extends React.Component {
@@ -64,7 +65,7 @@ class App extends React.Component {
     functions.delayCall(()=>{this.setState({display: Dashboard})}, Intro.delay);
   }
 
-  setLocation=(location={"latitude": 39.2,"longitude": -96.5})=>{
+  setLocation=(location={"latitude": DEFAULT_LATITUDE,"longitude": DEFAULT_LONGITUDE})=>{
     let status = this.state.status;
     if(Object.keys(location).length > 0){
       status.location = true;
