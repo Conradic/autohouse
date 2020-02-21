@@ -69,17 +69,14 @@ var corsOptions = {
 
 let serverStatus = {
   connections: {
-    plug: false
   },
   status: {
-    plug: null,
     server: true
   }
 };
 
 
 let tpLink={
-  livingRoom: null,
   List: {
     Flag: false,
     Devices: []

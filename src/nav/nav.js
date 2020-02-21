@@ -1,5 +1,5 @@
 import React from 'react';
-import './nav.css';
+import './nav.scss';
 
 import Tabs from './tab/tabs';
 import * as Thermal from '../thermal/ThermalControl';

@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './MainPage.css';
+import './MainPage.scss';
 import Square from '../components/ContentSquare';
 import Graph from '../components/Graph.js';
 import * as None from '../components/None.js';

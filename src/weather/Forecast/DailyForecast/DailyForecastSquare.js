@@ -7,10 +7,10 @@ class DailyForecastSquare extends React.Component{
         let avg = 60;
         let color = 255*(temp/120);
         if(temp>avg){
-            return `rgb(${color+100}, 100, ${100-color})`;
+            return `rgb(${color+200}, 100, ${200-color})`;
         }
         else{
-            return `rgb(${100-color}, 100, ${color+100})`;
+            return `rgb(${200-color}, 100, ${color+200})`;
         }
     }
     getTitle=()=>{
