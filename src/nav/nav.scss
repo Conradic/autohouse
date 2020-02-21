@@ -1,0 +1,110 @@
+.nav{
+    background-color: rgba(3, 3, 73, 0.74);
+    width: 200px;
+    position: absolute;
+    left: 0px;
+    border-style: solid;
+    border-color: black;
+    border-top-width: 0;
+    border-bottom-width: 0; 
+    height: 100%;
+  }
+  
+  .nav-component{
+    height: 100%;
+    background: navy;
+    text-align: center;
+    position: relative;
+    margin: auto;
+  }
+  .nav-component-selected{
+    height: 100%;
+    background: rgb(6, 6, 168);
+    text-align: center;
+    position: relative;
+    margin: auto;
+  }
+  .nav-component:hover{
+      background-color: blue;
+  }
+  .nav-component-icon {
+      height: 80%;
+      top: 10%;
+      position: relative;
+      display: inline-flex;
+      margin: auto;
+      padding: auto;
+      z-index: 5;
+      max-width: 200px;
+  }
+
+  .fan{
+        animation: cwspin infinite 2.1347s linear;
+        position: relative;
+        pointer-events: none;
+  }
+
+  .cog {
+    animation: cwspin infinite 50s linear;
+    position: relative;
+    pointer-events: none;
+}
+
+.void{
+  //animation: pulseAndccwSpin infinite 0.000006s linear;
+  position: relative;
+  pointer-events: none;
+}
+ 
+.react {
+  //animation: shake infinite .01s linear;
+  animation: spin infinite 5s linear;
+  position: relative;
+  pointer-events: none;
+}
+  
+  .nav-divider{
+    border-style: solid;
+    border-top-width: 2px;
+    border-color: black;
+  }
+
+
+  @keyframes cwspin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes ccwspin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+  @keyframes pulseAndccwSpin {
+    from {
+      transform: rotate(0deg) scale(1);
+    }
+    to {
+      transform: rotate(-360deg) scale(.9);
+    }
+  }
+  @keyframes shake {
+    from {
+      transform: rotate(-7deg) scale(1.05);
+    }
+    to {
+      transform: rotate(7deg) scale(0.92);
+    }
+    from {
+      transform: rotate(7deg) scale(0.92);
+    }
+    to {
+      transform: rotate(-7deg) scale(1.08);
+    }
+  }

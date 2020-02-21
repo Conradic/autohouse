@@ -1,0 +1,72 @@
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .Home-logo {
+    animation: spin infinite 3.14159265358979s linear;
+    height: 400px;
+    pointer-events: none;
+    position: relative;
+    top: 50%;
+    margin-top: -200px;
+    opacity: 0.003;
+  }
+
+  .MainPageContent{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    justify-content: center !important;
+    align-items: center !important;
+    justify-items: center !important;
+    align-content: center !important;
+    z-index: 1;
+  }
+
+  .lightContent{
+    height: 100%;
+    width: 100%;
+}
+
+.contentTop{
+    background-color: rgb(23, 155, 207);
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    border-bottom-width: 2px;
+    border-color: black;
+}
+
+
+.contentBottom{
+    background-color: rgb(78, 32, 32);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+}
+
+button{
+    padding: 5px;
+}
+
+.TimePicker{
+    background: rgba(110, 110, 110, 0.747);
+    border-color: black;
+    border-width: 3px;
+}
+
+.inline{
+  width: 33.3%;
+  height: 100%;
+  display: inline-flex;
+}
+
